@@ -1,8 +1,7 @@
 import React from "react";
-import '../sign-in/sign-in.styles.scss';
 import FormInput from "../form-input/form-input.component";
 import CustomButton from "../custom-button/custom-button.component";
-import {auth, signInWithGoogle} from "../../firebase/firebase.utils";
+import {auth, signInwithGoogle} from "../../firebase/firebase.utils";
 
 import {
     SignInContainer,
@@ -64,7 +63,7 @@ import {
             />
             <ButtonsBarContainer>
               <CustomButton type='submit'> Sign in </CustomButton>
-              <CustomButton onClick={signInWithGoogle} isGoogleSignIn>
+              <CustomButton onClick={signInwithGoogle} isGoogleSignIn>
                 Sign in with Google
               </CustomButton>
             </ButtonsBarContainer>
