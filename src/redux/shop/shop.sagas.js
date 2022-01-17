@@ -4,11 +4,9 @@ import { fetchCollectionsFaliure, fetchCollectionsSuccess } from './shop.actions
 
 import ShopActionTypes from './shop.types';
 
-export function* fetchCollectionsAsync(){
-    yield console.log('I am fired');
-
+export function* fetchCollections(){
     try {
-        const collectionRef =firestore.collection('collections');
+        const collectionRef = firestore.collection('collections');
         const snapshot = yield collectionRef.get();
         const collectionsMap = yield call(
             convertCollectionsSnapshotToMap,
@@ -30,9 +28,6 @@ export function* fetchCollectionsAsync(){
     // }).catch(error => dispatch(fetchCollectionsFaliure(error.message)));
 }
 
-export function* fetchCollectionsStart(){
-    yield takeLatest(
-        ShopActionTypes.FETCH_COLLECTIONS_START,
-        fetchCollectionsAsync
-    );
-}
+export function* onFetchCollectionsStart() {
+    yield takeLatest(ShopActionTypes.FETCH_COLLECTIONS_START, fetchCollections);
+  }
