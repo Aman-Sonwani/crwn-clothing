@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import './App.css';
 
-import { connect } from 'react-redux';
 import { selectCurrentUser } from './redux/user/user.selectors';
+import { useSelector, useDispatch } from 'react-redux';
 
 import {Route, Switch, Redirect} from 'react-router-dom';
 
@@ -14,14 +14,14 @@ import CheckoutPage from './pages/checkout/checkout.component';
 
 import { checkUserSession } from './redux/user/user.actions';
 
-import { createStructuredSelector } from 'reselect';
 
-const App = ({ checkUserSession, currentUser }) => {
+const App = () => {
+  const currentUser = useSelector(selectCurrentUser);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    checkUserSession();
-
-  }, [checkUserSession]);
+    dispatch(checkUserSession());
+  }, [dispatch]);
 
   return (
     <div>
@@ -46,12 +46,5 @@ const App = ({ checkUserSession, currentUser }) => {
   );
 }
 
-const mapStateToProps = createStructuredSelector({
-  currentUser: selectCurrentUser
-});
 
-const mapDispatchToProps = dispatch => ({
-  checkUserSession: () => dispatch(checkUserSession())
-});
-
-export default connect(mapStateToProps, mapDispatchToProps )(App);
+export default App;
